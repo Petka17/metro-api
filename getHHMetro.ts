@@ -1,7 +1,8 @@
 import { promises as fs } from "fs";
 import axios from "axios";
 import Decoder, * as _ from "jsonous";
-import { ok, err } from "resulty";
+// import { ok, err } from "resulty";
+import { ok } from "resulty";
 
 const createHHUrl = (cityId: number): string =>
   `https://api.hh.ru/metro/${cityId}`;
@@ -17,14 +18,14 @@ const numToStr = new Decoder<string>(v => {
   }
 });
 
-const strWithPostfix = postfix =>
-  new Decoder<string>(v => {
-    if (typeof v === "string") {
-      return ok(`${v}${postfix}`);
-    }
+// const strWithPostfix = postfix =>
+//   new Decoder<string>(v => {
+//     if (typeof v === "string") {
+//       return ok(`${v}${postfix}`);
+//     }
 
-    return err(`It expected string but ${v} was ${typeof v}`);
-  });
+//     return err(`It expected string but ${v} was ${typeof v}`);
+//   });
 
 type DecodedMetro = {
   station: string;
@@ -44,7 +45,7 @@ type DecodedMetroLine = {
 };
 
 const metroLineDecoder: Decoder<DecodedMetroLine> = _.succeed({})
-  .assign("line", _.field("name", strWithPostfix(" линия")))
+  .assign("line", _.field("name", _.string))
   .assign("color", _.field("hex_color", _.string))
   .assign("stations", _.field("stations", _.array(metroDecoder)));
 

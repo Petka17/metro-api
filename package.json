@@ -1,6 +1,9 @@
 {
   "name": "metro",
   "license": "MIT",
+  "scripts": {
+    "start": "ts-node index.ts"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "jsonous": "^3.3.1",

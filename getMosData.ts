@@ -25,7 +25,7 @@ type DecodedMetroList = DecodedMetro[];
 const metroListDecoder: Decoder<DecodedMetroList> = _.array(metroDecoder);
 
 type Metro = {
-  line: string;
+  station: string;
   status: string;
 };
 
@@ -53,7 +53,7 @@ const main = async (): Promise<MetroLine[]> => {
 
     if (metroLine) {
       metroLine.stations.push({
-        line: station.station,
+        station: station.station,
         status: station.status
       });
     } else {
@@ -61,7 +61,7 @@ const main = async (): Promise<MetroLine[]> => {
         line: station.line,
         stations: [
           {
-            line: station.station,
+            station: station.station,
             status: station.status
           }
         ]
